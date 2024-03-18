@@ -6,14 +6,15 @@ from datetime import datetime
 from alpaca_trade_api import REST
 from timedelta import Timedelta
 from finbert_utils import estimate_sentiment
+import creds
 
-API_KEY = "PK9YI8PV02PWXIQ5BFKK"
-API_SECRET = "c1idqTS6Iskfh0kERSedinA1MrVkGEvhVkolMJvM"
+
+
 BASE_URL = "https://paper-api.alpaca.markets/v2"
 
 ALPACA_CREDS = {
-    "API_KEY": API_KEY,
-    "API_SECRET": API_SECRET,
+    "API_KEY": creds.API_KEY,
+    "API_SECRET": creds.API_SECRET,
     "PAPER": True
 }
 
@@ -23,7 +24,7 @@ class MLTrader(Strategy):
         self.sleeptime = "24H"
         self.last_trade = None
         self.cash_at_risk = cash_at_risk
-        self.api = REST(base_url=BASE_URL, key_id=API_KEY, secret_key=API_SECRET)
+        self.api = REST(base_url=BASE_URL, key_id=creds.API_KEY, secret_key=creds.API_SECRET)
 
     def position_sizing(self):
         cash = self.get_cash()
